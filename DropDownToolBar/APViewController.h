@@ -11,6 +11,8 @@
 
 @interface APViewController : UIViewController
 
+@property (nonatomic, retain) APNavigationController *navController;
+
 - (IBAction)didSelectShow:(id)sender;
 
 @end

@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "APToolbar.h"
 
 @interface APNavigationController : UINavigationController
 
-@property (nonatomic, retain) APToolbar *toolbar;
+@property (nonatomic, retain) UIToolbar *toolbar; // Reference to dynamically change items based on which bar button item is clicked
+@property (nonatomic, retain) NSString *activeNavigationBarTitle; // Navigation bar title when the toolbar is shown
+@property (nonatomic, retain) NSString *activeBarButtonTitle; // UIBarButton title when toolbar is shown
 
+- (void)setActiveBarButtonTitle:(NSString*)title;
+- (void)setActiveNavigationBarTitle:(NSString*)title;
 - (void)toggleToolbar:(id)sender;
 
 @end

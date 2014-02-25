@@ -11,7 +11,8 @@
 @interface APNavigationController ()
 
 @property (nonatomic, assign) BOOL isVisible;
-@property (nonatomic, retain) NSString *currentTitle;
+@property (nonatomic, retain) NSString *originalNavigationBarTitle;
+@property (nonatomic, retain) NSString *originalBarButtonTitle;
 
 @end
 
@@ -30,11 +31,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.toolbar = [[APToolbar alloc] init];
-    self.toolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.navigationBar insertSubview:self.toolbar atIndex:0];
-    self.currentTitle = self.navigationBar.topItem.title;
+    self.originalNavigationBarTitle = self.navigationBar.topItem.title;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,9 +43,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)toggleToolbar:(id)sender
+- (void)toggleToolbar:(UIBarButtonItem*)item
 {
-    UIBarButtonItem *item = (UIBarButtonItem*)sender;
     __weak APNavigationController *weakSelf = self;
     if (self.isVisible) {
         CGRect frame = self.toolbar.frame;
@@ -59,13 +58,14 @@
             weakSelf.isVisible = !weakSelf.isVisible;
             weakSelf.toolbar.hidden = YES;
         }];
-        self.navigationBar.topItem.title = self.currentTitle;
-        [item setTitle:@"Show"];
+        self.navigationBar.topItem.title = self.originalNavigationBarTitle;
+        item.title = self.originalBarButtonTitle;
     } else {
         CGRect frame = self.toolbar.frame;
         frame.origin.y = 0.;
         self.toolbar.hidden = NO;
         self.toolbar.frame = frame;
+        self.originalBarButtonTitle = item.title;
         [UIView animateWithDuration:0.25 animations:^{
             CGRect frame = self.toolbar.frame;
             frame.origin.y = self.navigationBar.frame.size.height;
@@ -73,8 +73,12 @@
         } completion:^(BOOL finished) {
             weakSelf.isVisible = !weakSelf.isVisible;
         }];
-        self.navigationBar.topItem.title = @"";
-        [item setTitle:@"Hide"];
+        if (self.activeNavigationBarTitle) {
+            self.navigationBar.topItem.title = self.activeNavigationBarTitle;
+        }
+        if (self.activeBarButtonTitle) {
+            item.title = self.activeBarButtonTitle;
+        }
     }
 }
 

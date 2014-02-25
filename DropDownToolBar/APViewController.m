@@ -19,10 +19,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationController.toolbar.items =
-        @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-          [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:nil],
-[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil]];
+    self.navController = (APNavigationController*)self.navigationController;
+    self.navController.activeNavigationBarTitle = @"Tool bar visible";
+    self.navController.activeBarButtonTitle = @"Hide";
 }
 
 - (void)didReceiveMemoryWarning
@@ -33,8 +32,12 @@
 
 - (IBAction)didSelectShow:(id)sender
 {
-    APNavigationController *navController = (APNavigationController*)self.navigationController;
-    [navController toggleToolbar:sender];
+    self.navController.toolbar.items = ({
+        @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+          [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:nil],
+          [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil]];
+    });
+    [self.navController toggleToolbar:sender];
 }
 
 @end

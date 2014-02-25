@@ -21,7 +21,6 @@
 		9295E8C018BBEF15002ADA10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9295E8A218BBEF15002ADA10 /* UIKit.framework */; };
 		9295E8C818BBEF15002ADA10 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9295E8C618BBEF15002ADA10 /* InfoPlist.strings */; };
 		9295E8CA18BBEF15002ADA10 /* DropDownToolBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9295E8C918BBEF15002ADA10 /* DropDownToolBarTests.m */; };
-		9295E8D618BBF420002ADA10 /* APToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9295E8D518BBF420002ADA10 /* APToolbar.m */; };
 		9295E8D918BBF4F3002ADA10 /* APNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9295E8D818BBF4F3002ADA10 /* APNavigationController.m */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +54,6 @@
 		9295E8C518BBEF15002ADA10 /* DropDownToolBarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DropDownToolBarTests-Info.plist"; sourceTree = "<group>"; };
 		9295E8C718BBEF15002ADA10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9295E8C918BBEF15002ADA10 /* DropDownToolBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropDownToolBarTests.m; sourceTree = "<group>"; };
-		9295E8D418BBF420002ADA10 /* APToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APToolbar.h; sourceTree = "<group>"; };
-		9295E8D518BBF420002ADA10 /* APToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APToolbar.m; sourceTree = "<group>"; };
 		9295E8D718BBF4F3002ADA10 /* APNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNavigationController.h; sourceTree = "<group>"; };
 		9295E8D818BBF4F3002ADA10 /* APNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,8 +159,6 @@
 		9295E8D318BBF406002ADA10 /* DropDownToolbar */ = {
 			isa = PBXGroup;
 			children = (
-				9295E8D418BBF420002ADA10 /* APToolbar.h */,
-				9295E8D518BBF420002ADA10 /* APToolbar.m */,
 				9295E8D718BBF4F3002ADA10 /* APNavigationController.h */,
 				9295E8D818BBF4F3002ADA10 /* APNavigationController.m */,
 			);
@@ -270,7 +265,6 @@
 			files = (
 				9295E8AB18BBEF15002ADA10 /* main.m in Sources */,
 				9295E8B518BBEF15002ADA10 /* APViewController.m in Sources */,
-				9295E8D618BBF420002ADA10 /* APToolbar.m in Sources */,
 				9295E8D918BBF4F3002ADA10 /* APNavigationController.m in Sources */,
 				9295E8AF18BBEF15002ADA10 /* APAppDelegate.m in Sources */,
 			);

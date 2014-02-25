@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Test View-->
+        <!--View Controller - Ankur-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -16,10 +16,10 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Test View" id="bfX-Be-ZnR">
-                        <barButtonItem key="rightBarButtonItem" title="Show" id="GiW-hO-c0O">
+                    <navigationItem key="navigationItem" title="Ankur" id="bfX-Be-ZnR">
+                        <barButtonItem key="rightBarButtonItem" title="Contact" id="GiW-hO-c0O">
                             <connections>
                                 <action selector="didSelectShow:" destination="vXZ-lx-hvc" id="eCb-qy-04a"/>
                             </connections>
@@ -45,6 +45,7 @@
             <point key="canvasLocation" x="156" y="-241"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

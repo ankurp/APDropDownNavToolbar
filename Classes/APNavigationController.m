@@ -33,7 +33,7 @@
 	// Do any additional setup after loading the view.
     self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.navigationBar insertSubview:self.toolbar atIndex:0];
+    [self.navigationBar.superview insertSubview:self.toolbar belowSubview:self.navigationBar];
     self.originalNavigationBarTitle = self.navigationBar.topItem.title;
 }
 
@@ -48,7 +48,7 @@
     __weak APNavigationController *weakSelf = self;
     if (self.isVisible) {
         CGRect frame = self.toolbar.frame;
-        frame.origin.y = self.navigationBar.frame.size.height;
+        frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
         self.toolbar.frame = frame;
         [UIView animateWithDuration:0.25 animations:^{
             CGRect frame = self.toolbar.frame;
@@ -62,13 +62,13 @@
         item.title = self.originalBarButtonTitle;
     } else {
         CGRect frame = self.toolbar.frame;
-        frame.origin.y = 0.;
+        frame.origin.y = 0.f;
         self.toolbar.hidden = NO;
         self.toolbar.frame = frame;
         self.originalBarButtonTitle = item.title;
         [UIView animateWithDuration:0.25 animations:^{
             CGRect frame = self.toolbar.frame;
-            frame.origin.y = self.navigationBar.frame.size.height;
+            frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
             weakSelf.toolbar.frame = frame;
         } completion:^(BOOL finished) {
             weakSelf.isVisible = !weakSelf.isVisible;

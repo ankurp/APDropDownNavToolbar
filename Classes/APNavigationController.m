@@ -43,16 +43,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)toggleToolbar:(id)sender
+- (void)toggleDropDown:(id)sender
 {
     if (self.isDropDownVisible) {
-        [self hideToolbar:sender];
+        [self hideDropDown:sender];
     } else {
-        [self showToolbar:sender];
+        [self showDropDown:sender];
     }
 }
 
-- (void)hideToolbar:(id)sender
+- (void)hideDropDown:(id)sender
 {
     if(self.isDropDownVisible){
         __weak APNavigationController *weakSelf = self;
@@ -75,7 +75,7 @@
     }
 }
 
-- (void)showToolbar:(id)sender
+- (void)showDropDown:(id)sender
 {
     if(!self.isDropDownVisible){
         __weak APNavigationController *weakSelf = self;

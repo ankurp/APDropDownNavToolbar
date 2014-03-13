@@ -17,8 +17,8 @@
 
 - (void)setActiveBarButtonTitle:(NSString*)title;
 - (void)setActiveNavigationBarTitle:(NSString*)title;
-- (void)toggleToolbar:(id)sender;
-- (void)hideToolbar:(id)sender;
-- (void)showToolbar:(id)sender;
+- (void)toggleDropDown:(id)sender;
+- (void)hideDropDown:(id)sender;
+- (void)showDropDown:(id)sender;
 
 @end

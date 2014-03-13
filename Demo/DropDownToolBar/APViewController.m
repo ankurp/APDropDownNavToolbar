@@ -38,10 +38,10 @@
           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionClicked:)]];
     });
     if(self.navController.isDropDownVisible){
-        [self.navController hideToolbar:sender];
+        [self.navController hideDropDown:sender];
     }
     else{
-        [self.navController showToolbar:sender];
+        [self.navController showDropDown:sender];
     }
     // Can also toggle toolbar from current state
     // [self.navController toggleToolbar:sender];

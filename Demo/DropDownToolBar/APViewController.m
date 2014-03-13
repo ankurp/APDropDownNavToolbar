@@ -37,7 +37,7 @@
           [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editClicked:)],
           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionClicked:)]];
     });
-    if(self.navController.isDropDownToolbarVisible){
+    if(self.navController.isDropDownVisible){
         [self.navController hideToolbar:sender];
     }
     else{

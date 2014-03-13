@@ -45,7 +45,7 @@
 
 - (void)toggleToolbar:(id)sender
 {
-    if (self.isDropDownToolbarVisible) {
+    if (self.isDropDownVisible) {
         [self hideToolbar:sender];
     } else {
         [self showToolbar:sender];
@@ -54,7 +54,7 @@
 
 - (void)hideToolbar:(id)sender
 {
-    if(self.isDropDownToolbarVisible){
+    if(self.isDropDownVisible){
         __weak APNavigationController *weakSelf = self;
         CGRect frame = self.dropDownToolbar.frame;
         frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
@@ -64,7 +64,7 @@
             frame.origin.y = 0.;
             weakSelf.dropDownToolbar.frame = frame;
         } completion:^(BOOL finished) {
-            weakSelf.isDropDownToolbarVisible = !weakSelf.isDropDownToolbarVisible;
+            weakSelf.isDropDownVisible = !weakSelf.isDropDownVisible;
             weakSelf.dropDownToolbar.hidden = YES;
         }];
         self.navigationBar.topItem.title = self.originalNavigationBarTitle;
@@ -77,7 +77,7 @@
 
 - (void)showToolbar:(id)sender
 {
-    if(!self.isDropDownToolbarVisible){
+    if(!self.isDropDownVisible){
         __weak APNavigationController *weakSelf = self;
         CGRect frame = self.dropDownToolbar.frame;
         frame.origin.y = 0.f;
@@ -88,7 +88,7 @@
             frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
             weakSelf.dropDownToolbar.frame = frame;
         } completion:^(BOOL finished) {
-            weakSelf.isDropDownToolbarVisible = !weakSelf.isDropDownToolbarVisible;
+            weakSelf.isDropDownVisible = !weakSelf.isDropDownVisible;
         }];
         if (self.activeNavigationBarTitle) {
             self.navigationBar.topItem.title = self.activeNavigationBarTitle;

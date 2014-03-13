@@ -32,12 +32,22 @@
 
 - (IBAction)didSelectShow:(id)sender
 {
-    self.navController.toolbar.items = ({
+    self.navController.dropDownToolbar.items = ({
         @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-          [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:nil],
-          [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil]];
+          [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editClicked:)],
+          [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionClicked:)]];
     });
     [self.navController toggleToolbar:sender];
+}
+
+- (void)editClicked:(id)sender
+{
+    NSLog(@"Edit clicked");
+}
+
+- (void)actionClicked:(id)sender
+{
+    NSLog(@"Action clicked");
 }
 
 @end

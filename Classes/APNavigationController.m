@@ -10,9 +10,8 @@
 
 @interface APNavigationController ()
 
-@property (nonatomic, assign) BOOL isVisible;
-@property (nonatomic, retain) NSString *originalNavigationBarTitle;
-@property (nonatomic, retain) NSString *originalBarButtonTitle;
+@property (nonatomic, copy) NSString *originalNavigationBarTitle;
+@property (nonatomic, copy) NSString *originalBarButtonTitle;
 
 @end
 
@@ -31,9 +30,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-    self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.navigationBar.superview insertSubview:self.toolbar belowSubview:self.navigationBar];
+    self.dropDownToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    self.dropDownToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.dropDownToolbar.tintColor = self.navigationBar.tintColor;
+    [self.navigationBar.superview insertSubview:self.dropDownToolbar belowSubview:self.navigationBar];
     self.originalNavigationBarTitle = self.navigationBar.topItem.title;
 }
 
@@ -45,40 +45,51 @@
 
 - (void)toggleToolbar:(UIBarButtonItem*)item
 {
-    __weak APNavigationController *weakSelf = self;
     if (self.isVisible) {
-        CGRect frame = self.toolbar.frame;
-        frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
-        self.toolbar.frame = frame;
-        [UIView animateWithDuration:0.25 animations:^{
-            CGRect frame = self.toolbar.frame;
-            frame.origin.y = 0.;
-            weakSelf.toolbar.frame = frame;
-        } completion:^(BOOL finished) {
-            weakSelf.isVisible = !weakSelf.isVisible;
-            weakSelf.toolbar.hidden = YES;
-        }];
-        self.navigationBar.topItem.title = self.originalNavigationBarTitle;
-        item.title = self.originalBarButtonTitle;
+        [self hideToolbar:item];
     } else {
-        CGRect frame = self.toolbar.frame;
-        frame.origin.y = 0.f;
-        self.toolbar.hidden = NO;
-        self.toolbar.frame = frame;
-        self.originalBarButtonTitle = item.title;
-        [UIView animateWithDuration:0.25 animations:^{
-            CGRect frame = self.toolbar.frame;
-            frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
-            weakSelf.toolbar.frame = frame;
-        } completion:^(BOOL finished) {
-            weakSelf.isVisible = !weakSelf.isVisible;
-        }];
-        if (self.activeNavigationBarTitle) {
-            self.navigationBar.topItem.title = self.activeNavigationBarTitle;
-        }
-        if (self.activeBarButtonTitle) {
-            item.title = self.activeBarButtonTitle;
-        }
+        [self showToolbar:item];
+    }
+}
+
+- (void)hideToolbar:(UIBarButtonItem *)item
+{
+    __weak APNavigationController *weakSelf = self;
+    CGRect frame = self.dropDownToolbar.frame;
+    frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
+    self.dropDownToolbar.frame = frame;
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = self.dropDownToolbar.frame;
+        frame.origin.y = 0.;
+        weakSelf.dropDownToolbar.frame = frame;
+    } completion:^(BOOL finished) {
+        weakSelf.isVisible = !weakSelf.isVisible;
+        weakSelf.dropDownToolbar.hidden = YES;
+    }];
+    self.navigationBar.topItem.title = self.originalNavigationBarTitle;
+    item.title = self.originalBarButtonTitle;
+}
+
+- (void)showToolbar:(UIBarButtonItem *)item
+{
+    __weak APNavigationController *weakSelf = self;
+    CGRect frame = self.dropDownToolbar.frame;
+    frame.origin.y = 0.f;
+    self.dropDownToolbar.hidden = NO;
+    self.dropDownToolbar.frame = frame;
+    self.originalBarButtonTitle = item.title;
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = self.dropDownToolbar.frame;
+        frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
+        weakSelf.dropDownToolbar.frame = frame;
+    } completion:^(BOOL finished) {
+        weakSelf.isVisible = !weakSelf.isVisible;
+    }];
+    if (self.activeNavigationBarTitle) {
+        self.navigationBar.topItem.title = self.activeNavigationBarTitle;
+    }
+    if (self.activeBarButtonTitle) {
+        item.title = self.activeBarButtonTitle;
     }
 }
 

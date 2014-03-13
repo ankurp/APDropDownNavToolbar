@@ -37,7 +37,14 @@
           [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editClicked:)],
           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionClicked:)]];
     });
-    [self.navController toggleToolbar:sender];
+    if(self.navController.isDropDownToolbarVisible){
+        [self.navController hideToolbar:sender];
+    }
+    else{
+        [self.navController showToolbar:sender];
+    }
+    // Can also toggle toolbar from current state
+    // [self.navController toggleToolbar:sender];
 }
 
 - (void)editClicked:(id)sender

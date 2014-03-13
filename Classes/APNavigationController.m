@@ -54,42 +54,46 @@
 
 - (void)hideToolbar:(UIBarButtonItem *)item
 {
-    __weak APNavigationController *weakSelf = self;
-    CGRect frame = self.dropDownToolbar.frame;
-    frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
-    self.dropDownToolbar.frame = frame;
-    [UIView animateWithDuration:0.25 animations:^{
+    if(self.isVisible){
+        __weak APNavigationController *weakSelf = self;
         CGRect frame = self.dropDownToolbar.frame;
-        frame.origin.y = 0.;
-        weakSelf.dropDownToolbar.frame = frame;
-    } completion:^(BOOL finished) {
-        weakSelf.isVisible = !weakSelf.isVisible;
-        weakSelf.dropDownToolbar.hidden = YES;
-    }];
-    self.navigationBar.topItem.title = self.originalNavigationBarTitle;
-    item.title = self.originalBarButtonTitle;
+        frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
+        self.dropDownToolbar.frame = frame;
+        [UIView animateWithDuration:0.25 animations:^{
+            CGRect frame = self.dropDownToolbar.frame;
+            frame.origin.y = 0.;
+            weakSelf.dropDownToolbar.frame = frame;
+        } completion:^(BOOL finished) {
+            weakSelf.isVisible = !weakSelf.isVisible;
+            weakSelf.dropDownToolbar.hidden = YES;
+        }];
+        self.navigationBar.topItem.title = self.originalNavigationBarTitle;
+        item.title = self.originalBarButtonTitle;
+    }
 }
 
 - (void)showToolbar:(UIBarButtonItem *)item
 {
-    __weak APNavigationController *weakSelf = self;
-    CGRect frame = self.dropDownToolbar.frame;
-    frame.origin.y = 0.f;
-    self.dropDownToolbar.hidden = NO;
-    self.dropDownToolbar.frame = frame;
-    self.originalBarButtonTitle = item.title;
-    [UIView animateWithDuration:0.25 animations:^{
+    if(!self.isVisible){
+        __weak APNavigationController *weakSelf = self;
         CGRect frame = self.dropDownToolbar.frame;
-        frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
-        weakSelf.dropDownToolbar.frame = frame;
-    } completion:^(BOOL finished) {
-        weakSelf.isVisible = !weakSelf.isVisible;
-    }];
-    if (self.activeNavigationBarTitle) {
-        self.navigationBar.topItem.title = self.activeNavigationBarTitle;
-    }
-    if (self.activeBarButtonTitle) {
-        item.title = self.activeBarButtonTitle;
+        frame.origin.y = 0.f;
+        self.dropDownToolbar.hidden = NO;
+        self.dropDownToolbar.frame = frame;
+        self.originalBarButtonTitle = item.title;
+        [UIView animateWithDuration:0.25 animations:^{
+            CGRect frame = self.dropDownToolbar.frame;
+            frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
+            weakSelf.dropDownToolbar.frame = frame;
+        } completion:^(BOOL finished) {
+            weakSelf.isVisible = !weakSelf.isVisible;
+        }];
+        if (self.activeNavigationBarTitle) {
+            self.navigationBar.topItem.title = self.activeNavigationBarTitle;
+        }
+        if (self.activeBarButtonTitle) {
+            item.title = self.activeBarButtonTitle;
+        }
     }
 }
 

@@ -10,9 +10,8 @@
 
 @interface APNavigationController ()
 
-@property (nonatomic, assign) BOOL isVisible;
-@property (nonatomic, retain) NSString *originalNavigationBarTitle;
-@property (nonatomic, retain) NSString *originalBarButtonTitle;
+@property (nonatomic, copy) NSString *originalNavigationBarTitle;
+@property (nonatomic, copy) NSString *originalBarButtonTitle;
 
 @end
 
@@ -31,9 +30,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-    self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.navigationBar insertSubview:self.toolbar atIndex:0];
+    self.dropDownToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    self.dropDownToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.dropDownToolbar.tintColor = self.navigationBar.tintColor;
+    [self.navigationBar.superview insertSubview:self.dropDownToolbar belowSubview:self.navigationBar];
     self.originalNavigationBarTitle = self.navigationBar.topItem.title;
 }
 
@@ -43,42 +43,63 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)toggleToolbar:(UIBarButtonItem*)item
+- (void)toggleDropDown:(id)sender
 {
-    __weak APNavigationController *weakSelf = self;
-    if (self.isVisible) {
-        CGRect frame = self.toolbar.frame;
-        frame.origin.y = self.navigationBar.frame.size.height;
-        self.toolbar.frame = frame;
+    if (self.isDropDownVisible) {
+        [self hideDropDown:sender];
+    } else {
+        [self showDropDown:sender];
+    }
+}
+
+- (void)hideDropDown:(id)sender
+{
+    if(self.isDropDownVisible){
+        __weak APNavigationController *weakSelf = self;
+        CGRect frame = self.dropDownToolbar.frame;
+        frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
+        self.dropDownToolbar.frame = frame;
         [UIView animateWithDuration:0.25 animations:^{
-            CGRect frame = self.toolbar.frame;
+            CGRect frame = self.dropDownToolbar.frame;
             frame.origin.y = 0.;
-            weakSelf.toolbar.frame = frame;
+            weakSelf.dropDownToolbar.frame = frame;
         } completion:^(BOOL finished) {
-            weakSelf.isVisible = !weakSelf.isVisible;
-            weakSelf.toolbar.hidden = YES;
+            weakSelf.isDropDownVisible = !weakSelf.isDropDownVisible;
+            weakSelf.dropDownToolbar.hidden = YES;
         }];
         self.navigationBar.topItem.title = self.originalNavigationBarTitle;
-        item.title = self.originalBarButtonTitle;
-    } else {
-        CGRect frame = self.toolbar.frame;
-        frame.origin.y = 0.;
-        self.toolbar.hidden = NO;
-        self.toolbar.frame = frame;
-        self.originalBarButtonTitle = item.title;
+        if(sender && [sender isKindOfClass:[UIBarButtonItem class]]){
+            [(UIBarButtonItem *)sender setTitle:self.originalBarButtonTitle];
+        }
+        
+    }
+}
+
+- (void)showDropDown:(id)sender
+{
+    if(!self.isDropDownVisible){
+        __weak APNavigationController *weakSelf = self;
+        CGRect frame = self.dropDownToolbar.frame;
+        frame.origin.y = 0.f;
+        self.dropDownToolbar.hidden = NO;
+        self.dropDownToolbar.frame = frame;
         [UIView animateWithDuration:0.25 animations:^{
-            CGRect frame = self.toolbar.frame;
-            frame.origin.y = self.navigationBar.frame.size.height;
-            weakSelf.toolbar.frame = frame;
+            CGRect frame = self.dropDownToolbar.frame;
+            frame.origin.y = CGRectGetMaxY(self.navigationBar.frame);
+            weakSelf.dropDownToolbar.frame = frame;
         } completion:^(BOOL finished) {
-            weakSelf.isVisible = !weakSelf.isVisible;
+            weakSelf.isDropDownVisible = !weakSelf.isDropDownVisible;
         }];
         if (self.activeNavigationBarTitle) {
             self.navigationBar.topItem.title = self.activeNavigationBarTitle;
         }
-        if (self.activeBarButtonTitle) {
-            item.title = self.activeBarButtonTitle;
+        if(sender && [sender isKindOfClass:[UIBarButtonItem class]]){
+            self.originalBarButtonTitle = [(UIBarButtonItem *)sender title];
+            if (self.activeBarButtonTitle) {
+                [(UIBarButtonItem *)sender setTitle:self.activeBarButtonTitle];
+            }
         }
+
     }
 }
 

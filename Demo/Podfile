@@ -1,0 +1,2 @@
+platform :ios, "7.0"
+pod "APDropDownNavToolbar", :git => "https://github.com/ankurp/APDropDownNavToolbar.git"

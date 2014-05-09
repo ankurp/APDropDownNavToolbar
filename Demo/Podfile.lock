@@ -1,0 +1,14 @@
+PODS:
+  - APDropDownNavToolbar (1.1)
+
+DEPENDENCIES:
+  - APDropDownNavToolbar (from `https://github.com/ankurp/APDropDownNavToolbar.git`)
+
+EXTERNAL SOURCES:
+  APDropDownNavToolbar:
+    :git: https://github.com/ankurp/APDropDownNavToolbar.git
+
+SPEC CHECKSUMS:
+  APDropDownNavToolbar: 62131873890d3a30a2fdc98ffdda180a11e49aa4
+
+COCOAPODS: 0.32.1

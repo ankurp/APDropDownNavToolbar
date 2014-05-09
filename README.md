@@ -9,11 +9,11 @@ iOS7 Messages App style toolbar that drops down from navigation bar when tapping
     <th>APDropDownNavToolbar Demo:</th>
   </tr>
   <tr>
-    <td>
-      <img height=480 src="http://i.imgflip.com/75vjy.gif"/>
+    <td valign="top">
+      <img width=320 src="http://i.i.cbsi.com/cnwk.1d/i/tim2/2013/09/20/iOS_7_info_button.jpg"/>
     </td>
     <td>
-      <img height=480 src="http://recordit.co/KRlR4o.gif"/>
+      <img width=320 src="http://recordit.co/TTQEYkYMtA.gif"/>
     </td>
   </tr>
 </table>

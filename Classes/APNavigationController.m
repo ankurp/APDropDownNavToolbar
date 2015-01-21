@@ -67,7 +67,9 @@
             weakSelf.isDropDownVisible = !weakSelf.isDropDownVisible;
             weakSelf.dropDownToolbar.hidden = YES;
         }];
-        self.navigationBar.topItem.title = self.originalNavigationBarTitle;
+        if (self.activeNavigationBarTitle) {
+			self.navigationBar.topItem.title = self.originalNavigationBarTitle;
+		}
         if(sender && [sender isKindOfClass:[UIBarButtonItem class]]){
             [(UIBarButtonItem *)sender setTitle:self.originalBarButtonTitle];
         }
